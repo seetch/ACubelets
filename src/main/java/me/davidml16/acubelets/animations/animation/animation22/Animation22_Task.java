@@ -1,38 +1,20 @@
 package me.davidml16.acubelets.animations.animation.animation22;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.BlockPosition;
-import com.cryptomorin.xseries.XMaterial;
-import io.github.bananapuncher714.nbteditor.NBTEditor;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.ASSpawner;
 import me.davidml16.acubelets.animations.Animation;
 import me.davidml16.acubelets.animations.AnimationSettings;
-import me.davidml16.acubelets.animations.FakeBlock;
-import me.davidml16.acubelets.animations.animation.animation17.Animation17_Snowball;
-import me.davidml16.acubelets.animations.animation.animation21.Animation21_RotatingParticle;
-import me.davidml16.acubelets.animations.animation.animation6.Animation6_Music;
-import me.davidml16.acubelets.utils.LocationUtils;
-import me.davidml16.acubelets.utils.ParticlesAPI.Particles;
-import me.davidml16.acubelets.utils.ParticlesAPI.UtilParticles;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.Location;;
 import org.bukkit.entity.*;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.util.Vector;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Animation22_Task extends Animation {
@@ -76,7 +58,7 @@ public class Animation22_Task extends Animation {
 			armorStand = ASSpawner.spawn(
 					getMain(),
 					getCubeletBox().getLocation().clone().add(0.5, -0.3, 0.5),
-					SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzc2MzhjMzhkMzlhNjdkODk2MjY3NDNmMDZiOWM3YmU1YzUwY2Y4MzM1ZDJlOGYzOWViMWRhZDBkZjBmNzNkNiJ9fX0="),
+					XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzc2MzhjMzhkMzlhNjdkODk2MjY3NDNmMDZiOWM3YmU1YzUwY2Y4MzM1ZDJlOGYzOWViMWRhZDBkZjBmNzNkNiJ9fX0=", ProfileInputType.BASE64)).apply(),
 					false,
 					false,
 					true

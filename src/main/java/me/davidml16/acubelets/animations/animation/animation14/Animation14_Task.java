@@ -1,10 +1,12 @@
 package me.davidml16.acubelets.animations.animation.animation14;
 
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.ASSpawner;
 import me.davidml16.acubelets.animations.Animation;
 import me.davidml16.acubelets.animations.AnimationSettings;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -29,7 +31,7 @@ public class Animation14_Task extends Animation {
 
 	private double rotSpeed = 0.001;
 
-	private static final ItemStack BEE = SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTlkYzNmMDBlY2FiMjI0OWJiNmExNmM4YzUxMTVjZWI5ZjIzMjA1YTBkNTVjYzBlOWJhYmQyNTYyZjc5NTljNCJ9fX0=");
+	private static final ItemStack BEE = XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTlkYzNmMDBlY2FiMjI0OWJiNmExNmM4YzUxMTVjZWI5ZjIzMjA1YTBkNTVjYzBlOWJhYmQyNTYyZjc5NTljNCJ9fX0=", ProfileInputType.BASE64)).apply();
 
 	@Override
 	public void onTick(int time) {
@@ -39,7 +41,7 @@ public class Animation14_Task extends Animation {
 			armorStand = ASSpawner.spawn(
 					getMain(),
 					getCubeletBox().getLocation().clone().add(0.5, -0.3, 0.5),
-					SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmI5OTYwZWFkZTJkY2I2ZTc0NGM3ZDA4NGRlZjAwNTk5ZmU3MzI3ZTM5NzNjZDJjYTBhZjRhMmExZTZlYWMwOCJ9fX0="),
+					XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmI5OTYwZWFkZTJkY2I2ZTc0NGM3ZDA4NGRlZjAwNTk5ZmU3MzI3ZTM5NzNjZDJjYTBhZjRhMmExZTZlYWMwOCJ9fX0=", ProfileInputType.BASE64)).apply(),
 					false,
 					false,
 					true

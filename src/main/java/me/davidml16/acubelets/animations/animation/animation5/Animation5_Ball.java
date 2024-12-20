@@ -1,8 +1,10 @@
 package me.davidml16.acubelets.animations.animation.animation5;
 
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.ASSpawner;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -22,7 +24,7 @@ public class Animation5_Ball extends BukkitRunnable {
         armorStand.setSilent(true);
         armorStand.setVisible(false);
         armorStand.setGravity(true);
-        armorStand.setHelmet(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE1YWIwNWVhMjU0YzMyZTNjNDhmM2ZkY2Y5ZmQ5ZDc3ZDNjYmEwNGU2YjVlYzJlNjhiM2NiZGNmYWMzZmQifX19"));
+        armorStand.setHelmet(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE1YWIwNWVhMjU0YzMyZTNjNDhmM2ZkY2Y5ZmQ5ZDc3ZDNjYmEwNGU2YjVlYzJlNjhiM2NiZGNmYWMzZmQifX19", ProfileInputType.BASE64)).apply());
         armorStand.setSmall(false);
         armorStand.setBasePlate(false);
         armorStand.setRemoveWhenFarAway(false);

@@ -2,12 +2,14 @@ package me.davidml16.acubelets.handlers;
 
 import com.cryptomorin.xseries.XItemStack;
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.AnimationHandler;
 import me.davidml16.acubelets.objects.CubeletType;
 import me.davidml16.acubelets.utils.ItemBuilder;
 import me.davidml16.acubelets.utils.ItemStack64;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.TimeAPI.TimeAPI;
 import me.davidml16.acubelets.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
@@ -212,13 +214,13 @@ public class CubeletTypesHandler {
                         String[] icon = ((String) config.get("type.icon.texture")).split(":");
                         switch (icon[0].toLowerCase()) {
                             case "base64":
-                                cubeletType.setIcon(SkullCreator.itemFromBase64(icon[1]));
+                                cubeletType.setIcon(XSkull.createItem().profile(new Profileable.StringProfileable(icon[1], ProfileInputType.BASE64)).apply());
                                 break;
                             case "uuid":
-                                cubeletType.setIcon(SkullCreator.itemFromUuid(UUID.fromString(icon[1])));
+                                cubeletType.setIcon(XSkull.createItem().profile(new Profileable.UUIDProfileable(UUID.fromString(icon[1]))).apply());
                                 break;
                             case "name":
-                                cubeletType.setIcon(SkullCreator.itemFromName(icon[1]));
+                                cubeletType.setIcon(XSkull.createItem().profile(new Profileable.UsernameProfileable(icon[1])).apply());
                                 break;
                         }
                     } else {

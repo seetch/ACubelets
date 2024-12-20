@@ -1,6 +1,9 @@
 package me.davidml16.acubelets.animations.animation.animation15;
 
 import com.cryptomorin.xseries.particles.ParticleDisplay;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.ASSpawner;
 import me.davidml16.acubelets.animations.Animation;
@@ -8,7 +11,6 @@ import me.davidml16.acubelets.animations.AnimationSettings;
 import me.davidml16.acubelets.utils.LocationUtils;
 import me.davidml16.acubelets.utils.ParticlesAPI.Particles;
 import me.davidml16.acubelets.utils.ParticlesAPI.UtilParticles;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -140,7 +142,7 @@ public class Animation15_Task extends Animation {
 		armorStand = ASSpawner.spawn(
 				getMain(),
 				getCubeletBox().getLocation().clone().add(0.5, -0.3, 0.5),
-				SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTBlZTc4MWI3OWIxZmRjMTRhYzA4YjUwNDQ4Y2Q5MTc0ZjcxZTE1NTUxNmUzYmY1NDJhMmQ2YzQ2NmVhY2Y4MiJ9fX0="),
+				XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTBlZTc4MWI3OWIxZmRjMTRhYzA4YjUwNDQ4Y2Q5MTc0ZjcxZTE1NTUxNmUzYmY1NDJhMmQ2YzQ2NmVhY2Y4MiJ9fX0=", ProfileInputType.BASE64)).apply(),
 				false,
 				false,
 				true

@@ -1,6 +1,9 @@
 package me.davidml16.acubelets.menus.player;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.interfaces.CubeletDateComparator;
@@ -11,7 +14,6 @@ import me.davidml16.acubelets.menus.player.rewards.RewardsPreviewMenu;
 import me.davidml16.acubelets.objects.*;
 import me.davidml16.acubelets.utils.ItemBuilder;
 import me.davidml16.acubelets.utils.MessageUtils;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.TimeAPI.TimeUtils;
 import me.davidml16.acubelets.utils.Utils;
 import org.bukkit.Material;
@@ -134,7 +136,7 @@ public class CubeletsMenu extends Menu {
 
         if(Main.get().isSetting("GiftCubeletsCommand")) {
 
-            ItemStack gift = new ItemBuilder(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNlZjlhYTE0ZTg4NDc3M2VhYzEzNGE0ZWU4OTcyMDYzZjQ2NmRlNjc4MzYzY2Y3YjFhMjFhODViNyJ9fX0="))
+            ItemStack gift = new ItemBuilder(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNlZjlhYTE0ZTg4NDc3M2VhYzEzNGE0ZWU4OTcyMDYzZjQ2NmRlNjc4MzYzY2Y3YjFhMjFhODViNyJ9fX0=", ProfileInputType.BASE64)).apply())
                     .setName(guiLayout.getMessage("Items.Gift.Name"))
                     .setLore(guiLayout.getMessageList("Items.Gift.Lore"))
                     .toItemStack();

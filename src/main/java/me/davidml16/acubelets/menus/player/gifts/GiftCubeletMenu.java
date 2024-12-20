@@ -1,13 +1,15 @@
 package me.davidml16.acubelets.menus.player.gifts;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.objects.GUILayout;
 import me.davidml16.acubelets.objects.GiftGuiSession;
 import me.davidml16.acubelets.objects.Menu;
 import me.davidml16.acubelets.utils.ItemBuilder;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -98,13 +100,13 @@ public class GiftCubeletMenu extends Menu {
         cubelet = NBTEditor.set(cubelet, "send", "action");
         gui.setItem(getCenterSlot(), cubelet);
 
-        ItemStack add = new ItemBuilder(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjFkMGY4MmEyYTRjZGQ4NWY3OWY0ZDlkOTc5OGY5YzNhNWJjY2JlOWM3ZjJlMjdjNWZjODM2NjUxYThmM2Y0NSJ9fX0="))
+        ItemStack add = new ItemBuilder(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjFkMGY4MmEyYTRjZGQ4NWY3OWY0ZDlkOTc5OGY5YzNhNWJjY2JlOWM3ZjJlMjdjNWZjODM2NjUxYThmM2Y0NSJ9fX0=", ProfileInputType.BASE64)).apply())
                 .setName(guiLayout.getMessage("Items.Add.Name"))
                 .toItemStack();
         add = NBTEditor.set(add, "add", "action");
         gui.setItem(getCenterSlot() + 2, add);
 
-        ItemStack substract = new ItemBuilder(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmNWMyZjg5M2JkM2Y4OWNhNDA3MDNkZWQzZTQyZGQwZmJkYmE2ZjY3NjhjODc4OWFmZGZmMWZhNzhiZjYifX19"))
+        ItemStack substract = new ItemBuilder(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmNWMyZjg5M2JkM2Y4OWNhNDA3MDNkZWQzZTQyZGQwZmJkYmE2ZjY3NjhjODc4OWFmZGZmMWZhNzhiZjYifX19", ProfileInputType.BASE64)).apply())
                 .setName(guiLayout.getMessage("Items.Substract.Name"))
                 .toItemStack();
         substract = NBTEditor.set(substract, "substract", "action");

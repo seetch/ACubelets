@@ -1,13 +1,14 @@
 package me.davidml16.acubelets.conversation;
 
 import com.cryptomorin.xseries.XItemStack;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.menus.admin.type.TypeConfigMenu;
 import me.davidml16.acubelets.menus.admin.type.TypeSettingsMenu;
 import me.davidml16.acubelets.objects.CubeletType;
 import me.davidml16.acubelets.objects.Menu;
-import me.davidml16.acubelets.utils.ItemStack64;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
 import me.davidml16.acubelets.utils.Utils;
 import org.bukkit.Bukkit;
@@ -92,15 +93,15 @@ public class TypeIconConversation implements ConversationAbandonedListener, Comm
                             switch (method) {
 
                                 case "base64":
-                                    cubeletType.setIcon(SkullCreator.itemFromBase64(texture));
+                                    cubeletType.setIcon(XSkull.createItem().profile(new Profileable.StringProfileable(texture, ProfileInputType.BASE64)).apply());
                                     break;
 
                                 case "uuid":
-                                    cubeletType.setIcon(SkullCreator.itemFromUuid(UUID.fromString(texture)));
+                                    cubeletType.setIcon(XSkull.createItem().profile(new Profileable.UUIDProfileable(UUID.fromString(texture))).apply());
                                     break;
 
                                 case "name":
-                                    cubeletType.setIcon(SkullCreator.itemFromName(texture));
+                                    cubeletType.setIcon(XSkull.createItem().profile(new Profileable.UsernameProfileable(texture)).apply());
                                     break;
 
                             }
@@ -146,7 +147,7 @@ public class TypeIconConversation implements ConversationAbandonedListener, Comm
                                     Bukkit.getScheduler().runTask(main, () -> {
 
                                         main.getCubeletTypesHandler().getConfig(cubeletType.getId()).set("type.icon.texture", "base64:" + textureEncoded);
-                                        cubeletType.setIcon(SkullCreator.itemFromBase64(textureEncoded));
+                                        cubeletType.setIcon(XSkull.createItem().profile(new Profileable.StringProfileable(textureEncoded, ProfileInputType.BASE64)).apply());
 
                                         main.getCubeletTypesHandler().saveConfig(cubeletType.getId());
                                         param1ConversationContext.getForWhom().sendRawMessage("\n" + Utils.translate(main.getLanguageHandler().getPrefix()

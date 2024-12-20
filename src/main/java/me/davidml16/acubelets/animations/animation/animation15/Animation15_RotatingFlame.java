@@ -1,11 +1,13 @@
 package me.davidml16.acubelets.animations.animation.animation15;
 
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.utils.LocationUtils;
 import me.davidml16.acubelets.utils.ParticlesAPI.Particles;
 import me.davidml16.acubelets.utils.ParticlesAPI.UtilParticles;
-import me.davidml16.acubelets.utils.SkullCreator;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -30,7 +32,7 @@ public class Animation15_RotatingFlame extends BukkitRunnable {
         armorStand.setSilent(true);
         armorStand.setVisible(false);
         armorStand.setGravity(false);
-        armorStand.setHelmet(SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjI2YmRlNDUwNDljN2I3ZDM0NjA1ZDgwNmEwNjgyOWI2Zjk1NWI4NTZhNTk5MWZkMzNlN2VhYmNlNDRjMDgzNCJ9fX0="));
+        armorStand.setHelmet(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjI2YmRlNDUwNDljN2I3ZDM0NjA1ZDgwNmEwNjgyOWI2Zjk1NWI4NTZhNTk5MWZkMzNlN2VhYmNlNDRjMDgzNCJ9fX0=", ProfileInputType.BASE64)).apply());
         armorStand.setSmall(small);
         armorStand.setMarker(false);
         armorStand.setRemoveWhenFarAway(false);

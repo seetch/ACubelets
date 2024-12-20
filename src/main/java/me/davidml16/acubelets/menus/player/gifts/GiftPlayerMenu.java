@@ -1,6 +1,9 @@
 package me.davidml16.acubelets.menus.player.gifts;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.menus.player.CubeletsMenu;
@@ -8,7 +11,6 @@ import me.davidml16.acubelets.objects.GUILayout;
 import me.davidml16.acubelets.objects.GiftGuiSession;
 import me.davidml16.acubelets.objects.Menu;
 import me.davidml16.acubelets.utils.ItemBuilder;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -88,7 +90,7 @@ public class GiftPlayerMenu extends Menu {
 
                 if(!loop.getUniqueId().equals(player.getUniqueId())) {
 
-                    ItemStack item = new ItemBuilder(SkullCreator.itemFromUuid(loop.getUniqueId()))
+                    ItemStack item = new ItemBuilder(XSkull.createItem().profile(new Profileable.UUIDProfileable(loop.getUniqueId())).apply())
                             .setName(Utils.translate(guiLayout.getMessage("Items.Player.Name").replace("%player%",loop.getName())))
                             .setLore(guiLayout.getMessageList("Items.Player.Lore"))
                             .toItemStack();

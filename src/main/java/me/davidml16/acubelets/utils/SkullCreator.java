@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.util.Base64;
 import java.util.UUID;
 
+@Deprecated
 public class SkullCreator {
 
     @Deprecated

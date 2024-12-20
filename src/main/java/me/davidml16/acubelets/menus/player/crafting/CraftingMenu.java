@@ -1,13 +1,15 @@
 package me.davidml16.acubelets.menus.player.crafting;
 
 import com.cryptomorin.xseries.XMaterial;
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.enums.CraftType;
 import me.davidml16.acubelets.menus.player.CubeletsMenu;
 import me.davidml16.acubelets.objects.*;
 import me.davidml16.acubelets.utils.ItemBuilder;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -42,7 +44,7 @@ public class CraftingMenu extends Menu {
             ItemStack info = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.PlayerInfo.Material")).get().parseItem()).toItemStack();
 
             if(XMaterial.PLAYER_HEAD.parseItem().equals(info))
-                info = SkullCreator.itemFromUuid(player.getUniqueId());
+                info = XSkull.createItem().profile(new Profileable.UUIDProfileable(player.getUniqueId())).apply();
 
             ItemStack finalItem = new ItemBuilder(info)
                     .setName(guiLayout.getMessage("Items.PlayerInfo.Name").replaceAll("%player%", player.getName()))

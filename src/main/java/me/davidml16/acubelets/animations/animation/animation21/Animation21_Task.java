@@ -1,12 +1,12 @@
 package me.davidml16.acubelets.animations.animation.animation21;
 
+import com.cryptomorin.xseries.profiles.builder.XSkull;
+import com.cryptomorin.xseries.profiles.objects.ProfileInputType;
+import com.cryptomorin.xseries.profiles.objects.Profileable;
 import me.davidml16.acubelets.Main;
 import me.davidml16.acubelets.animations.ASSpawner;
 import me.davidml16.acubelets.animations.Animation;
 import me.davidml16.acubelets.animations.AnimationSettings;
-import me.davidml16.acubelets.animations.animation.animation14.Animation14_Music;
-import me.davidml16.acubelets.animations.animation.animation17.Animation17_Snowball;
-import me.davidml16.acubelets.utils.SkullCreator;
 import me.davidml16.acubelets.utils.Sounds;
 import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
@@ -44,7 +44,7 @@ public class Animation21_Task extends Animation {
 		}
 
 		if(time == 45) {
-			armorStand = ASSpawner.spawn(getMain(), getCubeletBox(), SkullCreator.itemFromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzRhNWRiOGVhNzk3N2M3Zjk2YTY4ZGZlMWZhNDliNjZlYWZiZWNkMzgxMWE2YjZkM2QxNzdkZGE1Zjk0MjMxMyJ9fX0="), false, false, getCubeletBox().getLocation().clone().add(0.5, -1.25, 0.5));
+			armorStand = ASSpawner.spawn(getMain(), getCubeletBox(), XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzRhNWRiOGVhNzk3N2M3Zjk2YTY4ZGZlMWZhNDliNjZlYWZiZWNkMzgxMWE2YjZkM2QxNzdkZGE1Zjk0MjMxMyJ9fX0=", ProfileInputType.BASE64)).apply(), false, false, getCubeletBox().getLocation().clone().add(0.5, -1.25, 0.5));
 			armorStandLocation = armorStand.getLocation();
 			getMain().getAnimationHandler().getEntities().add(armorStand);
 
