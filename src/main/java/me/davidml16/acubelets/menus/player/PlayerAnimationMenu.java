@@ -74,7 +74,7 @@ public class PlayerAnimationMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.PreviousPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.PreviousPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "previous", "action");
+            item = NBTEditor.set(item, "previous", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getSlot("PreviousPage") >= 0)
                 gui.setItem(((getSize() - 10) + guiLayout.getSlot("PreviousPage")), item);
@@ -88,7 +88,7 @@ public class PlayerAnimationMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.NextPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.NextPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "next", "action");
+            item = NBTEditor.set(item, "next", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getSlot("NextPage") >= 0)
                 gui.setItem((getSize() - 10) + guiLayout.getSlot("NextPage"), item);
@@ -99,7 +99,7 @@ public class PlayerAnimationMenu extends Menu {
                 .setName(guiLayout.getMessage("Items.Back.Name"))
                 .setLore(guiLayout.getMessageList("Items.Back.Lore"))
                 .toItemStack();
-        back = NBTEditor.set(back, "back", "action");
+        back = NBTEditor.set(back, "back", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem((getSize() - 10) + guiLayout.getSlot("Back"), back);
 
         ItemStack filler = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
@@ -109,7 +109,7 @@ public class PlayerAnimationMenu extends Menu {
             gui.addItem(getAnimationItem(player, guiLayout, animation.getId()));
 
         ItemStack randomAnimation = getRandomAnimationItem(player, guiLayout);
-        randomAnimation = NBTEditor.set(randomAnimation, "random", "action");
+        randomAnimation = NBTEditor.set(randomAnimation, "random", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem((getSize() - 10) + guiLayout.getSlot("RandomAnimation"), randomAnimation);
 
         fillTopSide(null, 4);
@@ -127,7 +127,7 @@ public class PlayerAnimationMenu extends Menu {
         if (event.getCurrentItem().getType() == Material.AIR) return;
         if (event.getClick() == ClickType.DOUBLE_CLICK) return;
 
-        String action = NBTEditor.getString(event.getCurrentItem(), "action");
+        String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
         if(event.getClick() == ClickType.DOUBLE_CLICK) return;
 
@@ -145,7 +145,7 @@ public class PlayerAnimationMenu extends Menu {
                 break;
 
             case "random":
-                String status = NBTEditor.getString(event.getCurrentItem(), "status");
+                String status = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "status");
 
                 if(status.equalsIgnoreCase("disabled")) {
                     getMain().getPlayerDataHandler().getData(player).setAnimation("random");
@@ -155,8 +155,8 @@ public class PlayerAnimationMenu extends Menu {
                 break;
 
             case "animation":
-                String animation = NBTEditor.getString(event.getCurrentItem(), "animation");
-                status = NBTEditor.getString(event.getCurrentItem(), "status");
+                String animation = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "animation");
+                status = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "status");
                 if(status.equalsIgnoreCase("unlocked")) {
                     getMain().getPlayerDataHandler().getData(player).setAnimation(animation);
                     playSound(SoundType.CLICK);
@@ -197,8 +197,8 @@ public class PlayerAnimationMenu extends Menu {
             else
                 item = getItem(guiLayout, animationSettings, "Selected", item);
 
-        item = NBTEditor.set(item, "animation", "action");
-        item = NBTEditor.set(item, animation, "animation");
+        item = NBTEditor.set(item, "animation", NBTEditor.CUSTOM_DATA, "action");
+        item = NBTEditor.set(item, animation, NBTEditor.CUSTOM_DATA, "animation");
 
         return item;
 
@@ -215,7 +215,7 @@ public class PlayerAnimationMenu extends Menu {
         else
             item = new ItemBuilder(itemStack).setName(name).setLore(lore).hideAttributes().toItemStack();
 
-        return NBTEditor.set(item, status.toLowerCase(), "status");
+        return NBTEditor.set(item, status.toLowerCase(), NBTEditor.CUSTOM_DATA, "status");
 
     }
 
@@ -237,7 +237,7 @@ public class PlayerAnimationMenu extends Menu {
             status = "enabled";
         }
 
-        return NBTEditor.set(item, status.toLowerCase(), "status");
+        return NBTEditor.set(item, status.toLowerCase(), NBTEditor.CUSTOM_DATA, "status");
 
     }
 

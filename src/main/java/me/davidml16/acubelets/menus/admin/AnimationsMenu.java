@@ -63,7 +63,7 @@ public class AnimationsMenu extends Menu {
         setInventory(inventory);
 
         ItemStack back = new ItemBuilder(XMaterial.ARROW.parseItem()).setName(Utils.translate("&aBack to config")).toItemStack();
-        back = NBTEditor.set(back, "back", "action");
+        back = NBTEditor.set(back, "back", NBTEditor.CUSTOM_DATA, "action");
 
         ItemStack filler = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
         fillBorders(filler);
@@ -74,7 +74,7 @@ public class AnimationsMenu extends Menu {
                     .setName(Utils.translate("&aPrevious page"))
                     .toItemStack();
 
-            item = NBTEditor.set(item, "previous", "action");
+            item = NBTEditor.set(item, "previous", NBTEditor.CUSTOM_DATA, "action");
 
             inventory.setItem(18, item);
 
@@ -86,7 +86,7 @@ public class AnimationsMenu extends Menu {
                     .setName(Utils.translate("&aaNext page"))
                     .toItemStack();
 
-            item = NBTEditor.set(item, "next", "action");
+            item = NBTEditor.set(item, "next", NBTEditor.CUSTOM_DATA, "action");
 
             inventory.setItem(26, item);
 
@@ -98,7 +98,7 @@ public class AnimationsMenu extends Menu {
             inventory.addItem(getAnimationItem(cubeletType, animation.getId()));
 
         ItemStack randomAnimation = getRandomAnimationItem(cubeletType, guiLayout);
-        randomAnimation = NBTEditor.set(randomAnimation, "animation", "action");
+        randomAnimation = NBTEditor.set(randomAnimation, "animation", NBTEditor.CUSTOM_DATA, "action");
         inventory.setItem(38, randomAnimation);
 
         openInventory();
@@ -112,7 +112,7 @@ public class AnimationsMenu extends Menu {
         if (event.getCurrentItem().getType() == Material.AIR) return;
         if (event.getClick() == ClickType.DOUBLE_CLICK) return;
 
-        String action = NBTEditor.getString(event.getCurrentItem(), "action");
+        String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
         if(event.getClick() == ClickType.DOUBLE_CLICK) return;
 
@@ -135,8 +135,8 @@ public class AnimationsMenu extends Menu {
 
             case "animation":
 
-                String status = NBTEditor.getString(event.getCurrentItem(), "status");
-                String animation = NBTEditor.getString(event.getCurrentItem(), "animation");
+                String status = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "status");
+                String animation = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "animation");
 
                 if(status.equalsIgnoreCase("unlocked")) {
 
@@ -177,8 +177,8 @@ public class AnimationsMenu extends Menu {
         else
             item = getItem(animationSettings, "Selected", item);
 
-        item = NBTEditor.set(item, animation, "animation");
-        item = NBTEditor.set(item, "animation", "action");
+        item = NBTEditor.set(item, animation, NBTEditor.CUSTOM_DATA, "animation");
+        item = NBTEditor.set(item, "animation", NBTEditor.CUSTOM_DATA, "action");
 
         return item;
 
@@ -197,7 +197,7 @@ public class AnimationsMenu extends Menu {
         else
             item = new ItemBuilder(itemStack).setName(name).setLore(lore).hideAttributes().toItemStack();
 
-        return NBTEditor.set(item, status.toLowerCase(), "status");
+        return NBTEditor.set(item, status.toLowerCase(), NBTEditor.CUSTOM_DATA, "status");
 
     }
 
@@ -219,8 +219,8 @@ public class AnimationsMenu extends Menu {
             status = "Selected";
         }
 
-        item = NBTEditor.set(item, "random", "animation");
-        item = NBTEditor.set(item, status.toLowerCase(), "status");
+        item = NBTEditor.set(item, "random", NBTEditor.CUSTOM_DATA, "animation");
+        item = NBTEditor.set(item, status.toLowerCase(), NBTEditor.CUSTOM_DATA, "status");
 
         return item;
 

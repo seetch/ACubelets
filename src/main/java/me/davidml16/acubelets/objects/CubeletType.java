@@ -164,7 +164,7 @@ public class CubeletType {
 
     public ItemStack getKeyNBT() {
         ItemStack key = getKey().clone();
-        key = NBTEditor.set(key, getId(), "keyType");
+        key = NBTEditor.set(key, getId(), NBTEditor.CUSTOM_DATA, "keyType");
         return key;
     }
 

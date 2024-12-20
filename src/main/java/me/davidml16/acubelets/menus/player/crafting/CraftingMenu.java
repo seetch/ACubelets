@@ -127,7 +127,7 @@ public class CraftingMenu extends Menu {
             }
 
             ItemStack item = new ItemBuilder(cubeletType.getIcon()).setName(Utils.translate(cubeletType.getName())).setLore(lore).toItemStack();
-            item = NBTEditor.set(item, craft.getCubeletType(), "cubeletType");
+            item = NBTEditor.set(item, craft.getCubeletType(), NBTEditor.CUSTOM_DATA, "cubeletType");
             item = NBTEditor.set(item, Boolean.toString(getMain().getCubeletCraftingHandler().haveIngredients(player, craft)), "haveIngredients");
 
             if(craft.getIngrediens().size() > 0)
@@ -165,7 +165,7 @@ public class CraftingMenu extends Menu {
 
             }
 
-            String cubeletType = NBTEditor.getString(event.getCurrentItem(), "cubeletType");
+            String cubeletType = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "cubeletType");
 
             CraftingConfirmationMenu craftingConfirmationMenu = new CraftingConfirmationMenu(getMain(), player);
             craftingConfirmationMenu.setAttribute(AttrType.CUSTOM_ID_ATTR, cubeletType);

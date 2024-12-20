@@ -26,7 +26,7 @@ public class Event_Block implements Listener {
 
         if(item == null) return;
 
-        if(!NBTEditor.contains(item, "keyType")) return;
+        if(!NBTEditor.contains(item, NBTEditor.CUSTOM_DATA, "keyType")) return;
 
         event.setCancelled(true);
 

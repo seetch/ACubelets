@@ -64,7 +64,7 @@ public class GiftCubeletMenu extends Menu {
                 .setName(guiLayout.getMessage("Items.Back.Name"))
                 .setLore(guiLayout.getMessageList("Items.Back.Lore"))
                 .toItemStack();
-        back = NBTEditor.set(back, "back", "action");
+        back = NBTEditor.set(back, "back", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem((getSize() - 10) + guiLayout.getSlot("Back"), back);
 
         List<String> cubeletLore = new ArrayList<>();
@@ -97,19 +97,19 @@ public class GiftCubeletMenu extends Menu {
                 .setName(Utils.translate(guiLayout.getMessage("Items.Cubelet.Name").replace("%cubelet_name%", session.getCubeletType().getName())))
                 .setLore(cubeletLore)
                 .toItemStack();
-        cubelet = NBTEditor.set(cubelet, "send", "action");
+        cubelet = NBTEditor.set(cubelet, "send", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem(getCenterSlot(), cubelet);
 
         ItemStack add = new ItemBuilder(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjFkMGY4MmEyYTRjZGQ4NWY3OWY0ZDlkOTc5OGY5YzNhNWJjY2JlOWM3ZjJlMjdjNWZjODM2NjUxYThmM2Y0NSJ9fX0=", ProfileInputType.BASE64)).apply())
                 .setName(guiLayout.getMessage("Items.Add.Name"))
                 .toItemStack();
-        add = NBTEditor.set(add, "add", "action");
+        add = NBTEditor.set(add, "add", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem(getCenterSlot() + 2, add);
 
         ItemStack substract = new ItemBuilder(XSkull.createItem().profile(new Profileable.StringProfileable("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmNWMyZjg5M2JkM2Y4OWNhNDA3MDNkZWQzZTQyZGQwZmJkYmE2ZjY3NjhjODc4OWFmZGZmMWZhNzhiZjYifX19", ProfileInputType.BASE64)).apply())
                 .setName(guiLayout.getMessage("Items.Substract.Name"))
                 .toItemStack();
-        substract = NBTEditor.set(substract, "substract", "action");
+        substract = NBTEditor.set(substract, "substract", NBTEditor.CUSTOM_DATA, "action");
         gui.setItem(getCenterSlot() - 2, substract);
 
         openInventory();
@@ -122,7 +122,7 @@ public class GiftCubeletMenu extends Menu {
         if (event.getCurrentItem() == null) return;
 
         Player player = getOwner();
-        String action = NBTEditor.getString(event.getCurrentItem(), "action");
+        String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
         if(event.getClick() == ClickType.DOUBLE_CLICK) return;
 

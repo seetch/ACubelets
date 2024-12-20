@@ -51,7 +51,7 @@ public class GiftMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.PreviousPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.PreviousPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "previous", "action");
+            item = NBTEditor.set(item, "previous", NBTEditor.CUSTOM_DATA, "action");
 
             gui.setItem((getSize() - 10) + guiLayout.getSlot("PreviousPage"), item);
 
@@ -64,7 +64,7 @@ public class GiftMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.NextPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.NextPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "next", "action");
+            item = NBTEditor.set(item, "next", NBTEditor.CUSTOM_DATA, "action");
 
             gui.setItem((getSize() - 10) + guiLayout.getSlot("NextPage"), item);
 
@@ -76,7 +76,7 @@ public class GiftMenu extends Menu {
                     .setName(guiLayout.getMessage("Items.Close.Name"))
                     .setLore(guiLayout.getMessageList("Items.Close.Lore"))
                     .toItemStack();
-            close = NBTEditor.set(close, "close", "action");
+            close = NBTEditor.set(close, "close", NBTEditor.CUSTOM_DATA, "action");
 
             gui.setItem((getSize() - 10) + guiLayout.getSlot("Close"), close);
 
@@ -86,7 +86,7 @@ public class GiftMenu extends Menu {
                     .setName(guiLayout.getMessage("Items.Back.Name"))
                     .setLore(guiLayout.getMessageList("Items.Back.Lore"))
                     .toItemStack();
-            back = NBTEditor.set(back, "back", "action");
+            back = NBTEditor.set(back, "back", NBTEditor.CUSTOM_DATA,  NBTEditor.CUSTOM_DATA,"action");
 
             gui.setItem((getSize() - 10) + guiLayout.getSlot("Back"), back);
 
@@ -112,8 +112,8 @@ public class GiftMenu extends Menu {
                         .setLore(lore)
                         .toItemStack();
 
-                item = NBTEditor.set(item, "send", "action");
-                item = NBTEditor.set(item, cubeletType.getId(), "typeID");
+                item = NBTEditor.set(item, "send", NBTEditor.CUSTOM_DATA, "action");
+                item = NBTEditor.set(item, cubeletType.getId(), NBTEditor.CUSTOM_DATA, "typeID");
 
                 gui.addItem(item);
 
@@ -135,7 +135,7 @@ public class GiftMenu extends Menu {
         Player player = getOwner();
         GiftGuiSession session = (GiftGuiSession) getAttribute(AttrType.GIFT_GUISESSION_ATTR);
 
-        String action = NBTEditor.getString(event.getCurrentItem(), "action");
+        String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
         if(event.getClick() == ClickType.DOUBLE_CLICK) return;
 
@@ -144,7 +144,7 @@ public class GiftMenu extends Menu {
         switch (action) {
 
             case "send":
-                String type = NBTEditor.getString(event.getCurrentItem(), "typeID");
+                String type = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "typeID");
                 CubeletType cubeletType = getMain().getCubeletTypesHandler().getTypeBydId(type);
 
                 GiftCubeletMenu giftCubeletMenu = new GiftCubeletMenu(getMain(), player);

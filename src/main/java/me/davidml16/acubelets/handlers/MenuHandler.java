@@ -95,7 +95,7 @@ public class MenuHandler {
 
         for (ItemStack itemStack : player.getInventory().getContents()) {
             if (itemStack == null) continue;
-            if(!NBTEditor.contains(itemStack, "acubelets")) continue;
+            if(!NBTEditor.contains(itemStack, NBTEditor.CUSTOM_DATA, "acubelets")) continue;
             itemStack.setAmount(0);
         }
 

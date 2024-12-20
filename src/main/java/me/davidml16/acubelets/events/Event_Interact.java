@@ -39,14 +39,14 @@ public class Event_Interact implements Listener {
 
             if(item != null) {
 
-                if (NBTEditor.contains(item, "keyType"))
+                if (NBTEditor.contains(item, NBTEditor.CUSTOM_DATA, "keyType"))
                     e.setCancelled(true);
 
             }
 
         }
 
-        if(item == null || !NBTEditor.contains(item, "keyType") || !main.isSetting("UseKeys")) {
+        if(item == null || !NBTEditor.contains(item, NBTEditor.CUSTOM_DATA, "keyType") || !main.isSetting("UseKeys")) {
 
             if(main.getCubeletBoxHandler().isClickType(action)) {
 
@@ -123,7 +123,7 @@ public class Event_Interact implements Listener {
 
                     if (e.getHand() != EquipmentSlot.HAND) return;
 
-                    String typeID = NBTEditor.getString(item, "keyType");
+                    String typeID = NBTEditor.getString(item, NBTEditor.CUSTOM_DATA, "keyType");
 
                     if(action == Action.LEFT_CLICK_BLOCK) {
 

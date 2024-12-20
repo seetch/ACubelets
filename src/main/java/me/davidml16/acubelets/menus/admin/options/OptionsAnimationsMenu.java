@@ -54,7 +54,7 @@ public class OptionsAnimationsMenu extends Menu {
         Inventory gui = createInventory(45, "Options | Animations");
 
         ItemStack back = new ItemBuilder(XMaterial.ARROW.parseItem()).setName(Utils.translate("&aBack to options")).toItemStack();
-        back = NBTEditor.set(back, "back", "action");
+        back = NBTEditor.set(back, "back", NBTEditor.CUSTOM_DATA, "action");
 
         ItemStack filler = XMaterial.GRAY_STAINED_GLASS_PANE.parseItem();
         fillBorders(filler);
@@ -65,7 +65,7 @@ public class OptionsAnimationsMenu extends Menu {
                     .setName(Utils.translate("&aPrevious page"))
                     .toItemStack();
 
-            item = NBTEditor.set(item, "previous", "action");
+            item = NBTEditor.set(item, "previous", NBTEditor.CUSTOM_DATA, "action");
 
             gui.setItem(18, item);
 
@@ -77,7 +77,7 @@ public class OptionsAnimationsMenu extends Menu {
                     .setName(Utils.translate("&aaNext page"))
                     .toItemStack();
 
-            item = NBTEditor.set(item, "next", "action");
+            item = NBTEditor.set(item, "next", NBTEditor.CUSTOM_DATA, "action");
 
             gui.setItem(26, item);
 
@@ -100,8 +100,8 @@ public class OptionsAnimationsMenu extends Menu {
                             Utils.translate("&eClick to edit settings "))
                     .toItemStack();
 
-            item = NBTEditor.set(item, animation.getId(), "animation");
-            item = NBTEditor.set(item, "animation", "action");
+            item = NBTEditor.set(item, animation.getId(), NBTEditor.CUSTOM_DATA, "animation");
+            item = NBTEditor.set(item, "animation", NBTEditor.CUSTOM_DATA, "action");
 
             gui.addItem(item);
 
@@ -118,7 +118,7 @@ public class OptionsAnimationsMenu extends Menu {
         if (event.getCurrentItem().getType() == Material.AIR) return;
         if (event.getClick() == ClickType.DOUBLE_CLICK) return;
 
-        String action = NBTEditor.getString(event.getCurrentItem(), "action");
+        String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
         if(action == null) return;
 
@@ -136,7 +136,7 @@ public class OptionsAnimationsMenu extends Menu {
 
             case "animation":
 
-                String animation = NBTEditor.getString(event.getCurrentItem(), "animation");
+                String animation = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "animation");
 
                 AnimationSettings animationSettings = getMain().getAnimationHandler().getAnimationSetting(animation);
 

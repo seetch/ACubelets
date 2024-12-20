@@ -72,7 +72,7 @@ public class CubeletRewardHandler {
 							}
 
 							try {
-								rewardIcon = NBTEditor.set(rewardIcon, "reward_" + iterator, "rewardID");
+								rewardIcon = NBTEditor.set(rewardIcon, "reward_" + iterator, NBTEditor.CUSTOM_DATA, "rewardID");
 							} catch (IllegalArgumentException exception) {
 								exception.printStackTrace();
 								continue;

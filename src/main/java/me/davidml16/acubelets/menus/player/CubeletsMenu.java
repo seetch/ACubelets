@@ -68,7 +68,7 @@ public class CubeletsMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.PreviousPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.PreviousPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "previous", "action");
+            item = NBTEditor.set(item, "previous", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getSlot("PreviousPage") >= 0)
                 inventory.setItem(((getSize() - 10) + guiLayout.getSlot("PreviousPage")), item);
@@ -82,7 +82,7 @@ public class CubeletsMenu extends Menu {
             ItemStack item = new ItemBuilder(XMaterial.matchXMaterial(guiLayout.getMessage("Items.NextPage.Material")).get().parseMaterial(), amount)
                     .setName(guiLayout.getMessage("Items.NextPage.Name"))
                     .toItemStack();
-            item = NBTEditor.set(item, "next", "action");
+            item = NBTEditor.set(item, "next", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getSlot("NextPage") >= 0)
                 inventory.setItem((getSize() - 10) + guiLayout.getSlot("NextPage"), item);
@@ -95,7 +95,7 @@ public class CubeletsMenu extends Menu {
                     .setName(guiLayout.getMessage("Items.Crafting.Name"))
                     .setLore(guiLayout.getMessageList("Items.Crafting.Lore"))
                     .toItemStack();
-            crafting = NBTEditor.set(crafting, "crafting", "action");
+            crafting = NBTEditor.set(crafting, "crafting", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getBoolean("Items.Crafting.Enabled") && guiLayout.getSlot("Crafting") >= 0)
                 inventory.setItem((getSize() - 10) + guiLayout.getSlot("Crafting"), crafting);
@@ -108,7 +108,7 @@ public class CubeletsMenu extends Menu {
                     .setName(guiLayout.getMessage("Items.Animations.Name"))
                     .setLore(guiLayout.getMessageList("Items.Animations.Lore"))
                     .toItemStack();
-            animation = NBTEditor.set(animation, "animations", "action");
+            animation = NBTEditor.set(animation, "animations", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getBoolean("Items.Animations.Enabled") && guiLayout.getSlot("Animations") >= 0)
                 inventory.setItem((getSize() - 10) + guiLayout.getSlot("Animations"), animation);
@@ -119,7 +119,7 @@ public class CubeletsMenu extends Menu {
                 .setName(guiLayout.getMessage("Items.Close.Name"))
                 .setLore(guiLayout.getMessageList("Items.Close.Lore"))
                 .toItemStack();
-        close = NBTEditor.set(close, "close", "action");
+        close = NBTEditor.set(close, "close", NBTEditor.CUSTOM_DATA, "action");
 
         if(guiLayout.getBoolean("Items.Close.Enabled") && guiLayout.getSlot("Close") >= 0)
             inventory.setItem((getSize() - 10) + guiLayout.getSlot("Close"), close);
@@ -128,7 +128,7 @@ public class CubeletsMenu extends Menu {
                 .setName(guiLayout.getMessage("Items.LootHistory.Name"))
                 .setLore(guiLayout.getMessageList("Items.LootHistory.Lore"))
                 .toItemStack();
-        history = NBTEditor.set(history, "loothistory", "action");
+        history = NBTEditor.set(history, "loothistory", NBTEditor.CUSTOM_DATA, "action");
 
         if(guiLayout.getBoolean("Items.LootHistory.Enabled") && guiLayout.getSlot("LootHistory") >= 0)
             inventory.setItem((getSize() - 10) + guiLayout.getSlot("LootHistory"), history);
@@ -140,7 +140,7 @@ public class CubeletsMenu extends Menu {
                     .setName(guiLayout.getMessage("Items.Gift.Name"))
                     .setLore(guiLayout.getMessageList("Items.Gift.Lore"))
                     .toItemStack();
-            gift = NBTEditor.set(gift, "gift", "action");
+            gift = NBTEditor.set(gift, "gift", NBTEditor.CUSTOM_DATA, "action");
 
             if(guiLayout.getBoolean("Items.Gift.Enabled") && guiLayout.getSlot("Gift") >= 0)
                 inventory.setItem((getSize() - 10) + guiLayout.getSlot("Gift"), gift);
@@ -161,7 +161,7 @@ public class CubeletsMenu extends Menu {
                             .setLore(guiLayout.getMessageList("Items.Ordered.Date.Lore"))
                             .toItemStack();
 
-                    orderByDate = NBTEditor.set(orderByDate, "ordered", "action");
+                    orderByDate = NBTEditor.set(orderByDate, "ordered", NBTEditor.CUSTOM_DATA, "action");
 
                     inventory.setItem((getSize() - 10) + guiLayout.getSlot("Ordered"), orderByDate);
 
@@ -172,7 +172,7 @@ public class CubeletsMenu extends Menu {
                             .setLore(guiLayout.getMessageList("Items.Ordered.Type.Lore"))
                             .toItemStack();
 
-                    orderByType = NBTEditor.set(orderByType, "ordered", "action");
+                    orderByType = NBTEditor.set(orderByType, "ordered", NBTEditor.CUSTOM_DATA, "action");
 
                     inventory.setItem((getSize() - 10) + guiLayout.getSlot("Ordered"), orderByType);
 
@@ -221,8 +221,8 @@ public class CubeletsMenu extends Menu {
                 }
 
                 ItemStack item = new ItemBuilder(type.getIcon()).setName(Utils.translate(type.getName())).setLore(lore).toItemStack();
-                item = NBTEditor.set(item, cubelet.getUuid().toString(), "cubeletUUID");
-                item = NBTEditor.set(item, type.getId(), "typeID");
+                item = NBTEditor.set(item, cubelet.getUuid().toString(), NBTEditor.CUSTOM_DATA, "cubeletUUID");
+                item = NBTEditor.set(item, type.getId(), NBTEditor.CUSTOM_DATA, "typeID");
 
                 int slot = getNextAvailableSlot();
 
@@ -262,7 +262,7 @@ public class CubeletsMenu extends Menu {
 
         if (slot >= (size - 9) && slot <= size) {
 
-            String action = NBTEditor.getString(event.getCurrentItem(), "action");
+            String action = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "action");
 
             if(event.getClick() == ClickType.DOUBLE_CLICK) return;
 
@@ -314,8 +314,8 @@ public class CubeletsMenu extends Menu {
 
             if (getMain().getPlayerDataHandler().getData(player.getUniqueId()).getCubelets().size() > 0) {
 
-                String cubeletUUID = NBTEditor.getString(event.getCurrentItem(), "cubeletUUID");
-                String typeID = NBTEditor.getString(event.getCurrentItem(), "typeID");
+                String cubeletUUID = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "cubeletUUID");
+                String typeID = NBTEditor.getString(event.getCurrentItem(), NBTEditor.CUSTOM_DATA, "typeID");
                 CubeletType type = getMain().getCubeletTypesHandler().getTypeBydId(typeID);
 
                 if(event.getClick() != getMain().getMenuHandler().getRewardPreviewClickType()) {
