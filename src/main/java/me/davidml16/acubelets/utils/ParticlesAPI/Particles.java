@@ -658,7 +658,7 @@ public enum Particles {
         if (hasProperty(ParticleProperty.REQUIRES_WATER)) {
             throw new IllegalArgumentException("There is no water at the center location");
         }
-        new ParticlePacket(this, direction, speed, isLongDistance(center, players), null).sendTo(center, players);
+        new ParticlePacket(this, direction, speed, isLongDistance(center, players), null).sendTo(center);
     }
 
     /**
@@ -698,7 +698,7 @@ public enum Particles {
         if (!isColorCorrect(this, color)) {
             throw new ParticleColorException("The particle color type is incorrect");
         }
-        new ParticlePacket(this, color, range > 256).sendTo(center, range);
+        new ParticlePacket(this, color, range > 256).sendTo(center);
     }
 
     /**
@@ -710,7 +710,6 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleColorException   If the particle effect is not colorable or the color type is incorrect
      * @see ParticlePacket#ParticlePacket(Particles, ParticleColor, boolean)
-     * @see ParticlePacket#sendTo(Location, List)
      */
     public void display(ParticleColor color, Location center, List<Player> players) throws ParticleVersionException, ParticleColorException {
         if (!isSupported()) {
@@ -722,7 +721,7 @@ public enum Particles {
         if (!isColorCorrect(this, color)) {
             throw new ParticleColorException("The particle color type is incorrect");
         }
-        new ParticlePacket(this, color, isLongDistance(center, players)).sendTo(center, players);
+        new ParticlePacket(this, color, isLongDistance(center, players)).sendTo(center);
     }
 
     /**
@@ -753,7 +752,6 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleDataException    If the particle effect does not require additional data or if the data type is incorrect
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, double)
      */
     public void display(ParticleData data, float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, double range) throws ParticleVersionException, ParticleDataException {
         if (!isSupported()) {
@@ -765,7 +763,7 @@ public enum Particles {
         if (!isDataCorrect(this, data)) {
             throw new ParticleDataException("The particle data type is incorrect");
         }
-        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, range > 256, data).sendTo(center, range);
+        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, range > 256, data).sendTo(center);
     }
 
     /**
@@ -782,7 +780,6 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleDataException    If the particle effect does not require additional data or if the data type is incorrect
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, List)
      */
     public void display(ParticleData data, float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, List<Player> players) throws ParticleVersionException, ParticleDataException {
         if (!isSupported()) {
@@ -794,7 +791,7 @@ public enum Particles {
         if (!isDataCorrect(this, data)) {
             throw new ParticleDataException("The particle data type is incorrect");
         }
-        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, isLongDistance(center, players), data).sendTo(center, players);
+        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, isLongDistance(center, players), data).sendTo(center);
     }
 
     /**
@@ -827,7 +824,6 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleDataException    If the particle effect does not require additional data or if the data type is incorrect
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, double)
      */
     public void display(ParticleData data, Vector direction, float speed, Location center, double range) throws ParticleVersionException, ParticleDataException {
         if (!isSupported()) {
@@ -839,7 +835,7 @@ public enum Particles {
         if (!isDataCorrect(this, data)) {
             throw new ParticleDataException("The particle data type is incorrect");
         }
-        new ParticlePacket(this, direction, speed, range > 256, data).sendTo(center, range);
+        new ParticlePacket(this, direction, speed, range > 256, data).sendTo(center);
     }
 
     /**
