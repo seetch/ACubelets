@@ -1,7 +1,6 @@
 package me.davidml16.acubelets.utils.ParticlesAPI;
 
-import me.davidml16.acubelets.utils.ReflectionUtils;
-import org.bukkit.Bukkit;
+import me.davidml16.acubelets.utils.Version;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,9 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -386,10 +382,6 @@ public enum Particles {
 
     private static final Map<String, Particles> NAME_MAP = new HashMap<>();
     private static final Map<Integer, Particles> ID_MAP = new HashMap<>();
-    private final String name;
-    private final int id;
-    private final int requiredVersion;
-    private final List<ParticleProperty> properties;
 
     // Initialize map for quick name and id lookup
     static {
@@ -398,6 +390,11 @@ public enum Particles {
             ID_MAP.put(effect.id, effect);
         }
     }
+
+    private final String name;
+    private final int id;
+    private final int requiredVersion;
+    private final List<ParticleProperty> properties;
 
     /**
      * Construct a new particle effect
@@ -412,51 +409,6 @@ public enum Particles {
         this.id = id;
         this.requiredVersion = requiredVersion;
         this.properties = Arrays.asList(properties);
-    }
-
-    /**
-     * Returns the name of this particle effect
-     *
-     * @return The name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Returns the id of this particle effect
-     *
-     * @return The id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Returns the required version for this particle effect (1.x)
-     *
-     * @return The required version
-     */
-    public int getRequiredVersion() {
-        return requiredVersion;
-    }
-
-    /**
-     * Determine if this particle effect has a specific property
-     *
-     * @return Whether it has the property or not
-     */
-    public boolean hasProperty(ParticleProperty property) {
-        return properties.contains(property);
-    }
-
-    /**
-     * Determine if this particle effect is supported by your current server version
-     *
-     * @return Whether the particle effect is supported or not
-     */
-    public boolean isSupported() {
-        return requiredVersion == -1 || ParticlePacket.getVersion() >= requiredVersion;
     }
 
     /**
@@ -532,6 +484,51 @@ public enum Particles {
     }
 
     /**
+     * Returns the name of this particle effect
+     *
+     * @return The name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the id of this particle effect
+     *
+     * @return The id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Returns the required version for this particle effect (1.x)
+     *
+     * @return The required version
+     */
+    public int getRequiredVersion() {
+        return requiredVersion;
+    }
+
+    /**
+     * Determine if this particle effect has a specific property
+     *
+     * @return Whether it has the property or not
+     */
+    public boolean hasProperty(ParticleProperty property) {
+        return properties.contains(property);
+    }
+
+    /**
+     * Determine if this particle effect is supported by your current server version
+     *
+     * @return Whether the particle effect is supported or not
+     */
+    public boolean isSupported() {
+        return requiredVersion == -1 || ParticlePacket.getVersion() >= requiredVersion;
+    }
+
+    /**
      * Displays a particle effect which is only visible for all players within a certain range in the world of @param center
      *
      * @param offsetX Maximum distance particles can fly away from the center on the x-axis
@@ -557,7 +554,7 @@ public enum Particles {
         if (hasProperty(ParticleProperty.REQUIRES_WATER)) {
             throw new IllegalArgumentException("There is no water at the center location");
         }
-        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, range > 256, null).sendTo(center, range);
+        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, range > 256, null).sendTo(center);
     }
 
     /**
@@ -586,7 +583,7 @@ public enum Particles {
         if (hasProperty(ParticleProperty.REQUIRES_WATER)) {
             throw new IllegalArgumentException("There is no water at the center location");
         }
-        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, isLongDistance(center, players), null).sendTo(center, players);
+        new ParticlePacket(this, offsetX, offsetY, offsetZ, speed, amount, isLongDistance(center, players), null).sendTo(center);
     }
 
     /**
@@ -619,7 +616,6 @@ public enum Particles {
      * @throws ParticleDataException    If the particle effect requires additional data
      * @throws IllegalArgumentException If the particle effect is not directional or if it requires water and none is at the center location
      * @see ParticlePacket#ParticlePacket(Particles, Vector, float, boolean, ParticleData)
-     * @see ParticlePacket#sendTo(Location, double)
      */
     public void display(Vector direction, float speed, Location center, double range) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
         if (!isSupported()) {
@@ -634,7 +630,7 @@ public enum Particles {
         if (hasProperty(ParticleProperty.REQUIRES_WATER)) {
             throw new IllegalArgumentException("There is no water at the center location");
         }
-        new ParticlePacket(this, direction, speed, range > 256, null).sendTo(center, range);
+        new ParticlePacket(this, direction, speed, range > 256, null).sendTo(center);
     }
 
     /**
@@ -648,7 +644,6 @@ public enum Particles {
      * @throws ParticleDataException    If the particle effect requires additional data
      * @throws IllegalArgumentException If the particle effect is not directional or if it requires water and none is at the center location
      * @see ParticlePacket#ParticlePacket(Particles, Vector, float, boolean, ParticleData)
-     * @see ParticlePacket#sendTo(Location, List)
      */
     public void display(Vector direction, float speed, Location center, List<Player> players) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
         if (!isSupported()) {
@@ -858,7 +853,6 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleDataException    If the particle effect does not require additional data or if the data type is incorrect
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, List)
      */
     public void display(ParticleData data, Vector direction, float speed, Location center, List<Player> players) throws ParticleVersionException, ParticleDataException {
         if (!isSupported()) {
@@ -870,7 +864,7 @@ public enum Particles {
         if (!isDataCorrect(this, data)) {
             throw new ParticleDataException("The particle data type is incorrect");
         }
-        new ParticlePacket(this, direction, speed, isLongDistance(center, players), data).sendTo(center, players);
+        new ParticlePacket(this, direction, speed, isLongDistance(center, players), data).sendTo(center);
     }
 
     /**
@@ -1282,21 +1276,14 @@ public enum Particles {
      */
     public static final class ParticlePacket {
         private static int version;
-        private static Class<?> enumParticle;
-        private static Constructor<?> packetConstructor;
-        private static Method getHandle;
-        private static Field playerConnection;
-        private static Method sendPacket;
         private static boolean initialized;
-        private static boolean useSendParticle;
         private final Particles effect;
-        private float offsetX;
         private final float offsetY;
         private final float offsetZ;
         private final float speed;
         private final int amount;
-        private final boolean longDistance;
         private final ParticleData data;
+        private float offsetX;
         private Object packet;
 
         /**
@@ -1327,7 +1314,6 @@ public enum Particles {
             this.offsetZ = offsetZ;
             this.speed = speed;
             this.amount = amount;
-            this.longDistance = longDistance;
             this.data = data;
         }
 
@@ -1359,35 +1345,11 @@ public enum Particles {
             }
         }
 
-        /**
-         * Initializes {@link #packetConstructor}, {@link #getHandle}, {@link #playerConnection} and {@link #sendPacket} and sets {@link #initialized} to <code>true</code> if it succeeds
-         * <p>
-         * <b>Note:</b> These fields only have to be initialized once, so it will return if {@link #initialized} is already set to <code>true</code>
-         *
-         * @throws VersionIncompatibleException if your bukkit version is not supported by this library
-         */
-        public static void initialize() throws VersionIncompatibleException {
+        public static void initialize() {
             if (initialized) {
                 return;
             }
-            try {
-                version = Integer.parseInt(PackageType.getServerVersion().split("_")[1]);
-                if (version > 7 && version < 13) {
-                    enumParticle = PackageType.MINECRAFT_SERVER.getClass("EnumParticle");
-                    useSendParticle = false;
-                } else { // 1.13
-                    initialized = true;
-                    useSendParticle = true;
-                    return;
-                }
-                Class<?> packetClass = PackageType.MINECRAFT_SERVER.getClass(version < 7 ? "Packet63WorldParticles" : "PacketPlayOutWorldParticles");
-                packetConstructor = ReflectionUtils.getConstructor(packetClass);
-                getHandle = ReflectionUtils.getMethod("CraftPlayer", PackageType.CRAFTBUKKIT_ENTITY, "getHandle");
-                playerConnection = ReflectionUtils.getField("EntityPlayer", PackageType.MINECRAFT_SERVER, false, "playerConnection");
-                sendPacket = ReflectionUtils.getMethod(playerConnection.getType(), "sendPacket", PackageType.MINECRAFT_SERVER.getClass("Packet"));
-            } catch (Exception exception) {
-                throw new VersionIncompatibleException("Your current bukkit version seems to be incompatible with this library", exception);
-            }
+            version = Version.v1_16_R1.getMinor();
             initialized = true;
         }
 
@@ -1404,164 +1366,43 @@ public enum Particles {
         }
 
         /**
-         * Determine if {@link #packetConstructor}, {@link #getHandle}, {@link #playerConnection} and {@link #sendPacket} are initialized
-         *
-         * @return Whether these fields are initialized or not
-         * @see #initialize()
-         */
-        public static boolean isInitialized() {
-            return initialized;
-        }
-
-        /**
          * Initializes {@link #packet} with all set values
          *
          * @param center Center location of the effect
-         * @throws PacketInstantiationException If instantion fails due to an unknown error
          */
-        private void initializePacket(Location center) throws PacketInstantiationException {
+        private void initializePacket(Location center) {
             if (packet != null) {
                 return;
             }
-            if (!useSendParticle) {
-                try {
-                    packet = packetConstructor.newInstance();
-                    if (version < 8) {
-                        String name = effect.getName();
-                        if (data != null) {
-                            name += data.getPacketDataString();
-                        }
-                        ReflectionUtils.setValue(packet, true, "a", name);
-                    } else {
-                        ReflectionUtils.setValue(packet, true, "a", enumParticle.getEnumConstants()[effect.getId()]);
-                        ReflectionUtils.setValue(packet, true, "j", longDistance);
-                        if (data != null) {
-                            int[] packetData = data.getPacketData();
-                            ReflectionUtils.setValue(packet, true, "k", effect == Particles.ITEM_CRACK ? packetData : new int[]{packetData[0] | (packetData[1] << 12)});
-                        }
-                    }
-                    ReflectionUtils.setValue(packet, true, "b", (float) center.getX());
-                    ReflectionUtils.setValue(packet, true, "c", (float) center.getY());
-                    ReflectionUtils.setValue(packet, true, "d", (float) center.getZ());
-                    ReflectionUtils.setValue(packet, true, "e", offsetX);
-                    ReflectionUtils.setValue(packet, true, "f", offsetY);
-                    ReflectionUtils.setValue(packet, true, "g", offsetZ);
-                    ReflectionUtils.setValue(packet, true, "h", speed);
-                    ReflectionUtils.setValue(packet, true, "i", amount);
-                } catch (Exception exception) {
-                    throw new PacketInstantiationException("Packet instantiation failed", exception);
+            if (effect == Particles.REDSTONE) {
+                int r = (int) (offsetX * 255);
+                int g = (int) (offsetY * 255);
+                int b = (int) (offsetZ * 255);
+                if (r == 0 && g == 0 && b == 0) { // Normal redstone particle, no color data supplied
+                    r = 255;
                 }
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, 0, new org.bukkit.Particle.DustOptions(Color.fromRGB(r, g, b), 1));
+            } else if (effect == Particles.SPELL_MOB || effect == Particles.SPELL_MOB_AMBIENT) {
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, 1);
+            } else if (effect == Particles.NOTE) {
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, 0, 0, 1);
+            } else if (effect == Particles.ITEM_CRACK) {
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, new ItemStack(data.getMaterial()));
+            } else if (effect == Particles.BLOCK_CRACK) {
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, data.getMaterial().createBlockData());
             } else {
-                if (effect == Particles.REDSTONE) {
-                    int r = (int) (offsetX * 255);
-                    int g = (int) (offsetY * 255);
-                    int b = (int) (offsetZ * 255);
-                    if (r == 0 && g == 0 && b == 0) { // Normal redstone particle, no color data supplied
-                        r = 255;
-                    }
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, 0, new org.bukkit.Particle.DustOptions(Color.fromRGB(r, g, b), 1));
-                } else if (effect == Particles.SPELL_MOB || effect == Particles.SPELL_MOB_AMBIENT) {
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, 1);
-                } else if (effect == Particles.NOTE) {
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, 0, 0, 1);
-                } else if (effect == Particles.ITEM_CRACK) {
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, new ItemStack(data.getMaterial()));
-                } else if (effect == Particles.BLOCK_CRACK) {
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center, amount, offsetX, offsetY, offsetZ, data.getMaterial().createBlockData());
-                } else {
-                    center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center.getX(), center.getY(), center.getZ(), amount, offsetX, offsetY, offsetZ, speed);
-                }
+                center.getWorld().spawnParticle(org.bukkit.Particle.valueOf(effect.toString()), center.getX(), center.getY(), center.getZ(), amount, offsetX, offsetY, offsetZ, speed);
             }
         }
 
         /**
-         * Sends the packet to a single player and caches it
-         *
-         * @param center Center location of the effect
-         * @param player Receiver of the packet
-         * @throws PacketInstantiationException If instantion fails due to an unknown error
-         * @throws PacketSendingException       If sending fails due to an unknown error
-         * @see #initializePacket(Location)
-         */
-        public void sendTo(Location center, Player player) throws PacketInstantiationException, PacketSendingException {
-            initializePacket(center);
-            if (useSendParticle) {
-                return;
-            }
-            try {
-                sendPacket.invoke(playerConnection.get(getHandle.invoke(player)), packet);
-            } catch (Exception exception) {
-                throw new PacketSendingException("Failed to send the packet to player '" + player.getName() + "'", exception);
-            }
-        }
-
-        /**
-         * Sends the packet to all players in the list
+         * Sends the packet to all players
          *
          * @param center  Center location of the effect
-         * @param players Receivers of the packet
          * @throws IllegalArgumentException If the player list is empty
-         * @see #sendTo(Location center, Player player)
          */
-        public void sendTo(Location center, List<Player> players) throws IllegalArgumentException {
-            if (useSendParticle) {
-                initializePacket(center);
-                return;
-            }
-            if (players.isEmpty()) {
-                throw new IllegalArgumentException("The player list is empty");
-            }
-            for (Player player : players) {
-                sendTo(center, player);
-            }
-        }
-
-        /**
-         * Sends the packet to all players in a certain range
-         *
-         * @param center Center location of the effect
-         * @param range  Range in which players will receive the packet (Maximum range for particles is usually 16, but it can differ for some types)
-         * @throws IllegalArgumentException If the range is lower than 1
-         * @see #sendTo(Location center, Player player)
-         */
-        public void sendTo(Location center, double range) throws IllegalArgumentException {
-            if (useSendParticle) {
-                initializePacket(center);
-                return;
-            }
-            if (range < 1) {
-                throw new IllegalArgumentException("The range is lower than 1");
-            }
-            String worldName = center.getWorld().getName();
-            double squared = range * range;
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (!player.getWorld().getName().equals(worldName) || player.getLocation().distanceSquared(center) > squared) {
-                    continue;
-                }
-                sendTo(center, player);
-            }
-        }
-
-        /**
-         * Represents a runtime exception that is thrown if a bukkit version is not compatible with this library
-         * <p>
-         * This class is part of the <b>ParticleEffect Library</b> and follows the same usage conditions
-         *
-         * @author DarkBlade12
-         * @since 1.5
-         */
-        private static final class VersionIncompatibleException extends RuntimeException {
-            private static final long serialVersionUID = 3203085387160737484L;
-
-            /**
-             * Construct a new version incompatible exception
-             *
-             * @param message Message that will be logged
-             * @param cause   Cause of the exception
-             */
-            public VersionIncompatibleException(String message, Throwable cause) {
-                super(message, cause);
-            }
+        public void sendTo(Location center) throws IllegalArgumentException {
+            initializePacket(center);
         }
 
         /**
@@ -1582,28 +1423,6 @@ public enum Particles {
              * @param cause   Cause of the exception
              */
             public PacketInstantiationException(String message, Throwable cause) {
-                super(message, cause);
-            }
-        }
-
-        /**
-         * Represents a runtime exception that is thrown if packet sending fails
-         * <p>
-         * This class is part of the <b>ParticleEffect Library</b> and follows the same usage conditions
-         *
-         * @author DarkBlade12
-         * @since 1.4
-         */
-        private static final class PacketSendingException extends RuntimeException {
-            private static final long serialVersionUID = 3203085387160737484L;
-
-            /**
-             * Construct a new packet sending exception
-             *
-             * @param message Message that will be logged
-             * @param cause   Cause of the exception
-             */
-            public PacketSendingException(String message, Throwable cause) {
                 super(message, cause);
             }
         }
