@@ -7,9 +7,7 @@ import me.davidml16.acubelets.enums.Rotation;
 import me.davidml16.acubelets.objects.CubeletMachine;
 import me.davidml16.acubelets.utils.StringUtils;
 import me.davidml16.acubelets.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.block.Action;
 
@@ -169,7 +167,16 @@ public class CubeletMachineHandler {
                     int y = config.getInt("machines." + i + ".location.y");
                     int z = config.getInt("machines." + i + ".location.z");
 
-                    if(Bukkit.getServer().getWorld(world) == null) continue;
+                    World bukkitWorld = Bukkit.getServer().getWorld(world);
+                    if (bukkitWorld == null) {
+                        Main.log.sendMessage(Utils.translate("    &cWorld not found: " + world + ". Attempting to load it."));
+                        WorldCreator worldCreator = new WorldCreator(world);
+                        bukkitWorld = worldCreator.createWorld();
+                        if (bukkitWorld == null) {
+                            Main.log.sendMessage(Utils.translate("    &cFailed to load world: " + world));
+                            continue;
+                        }
+                    }
 
                     Location loc = new Location(Bukkit.getWorld(world), x, y, z);
 
