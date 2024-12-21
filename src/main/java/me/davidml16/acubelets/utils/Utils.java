@@ -1,13 +1,16 @@
 package me.davidml16.acubelets.utils;
 
 import com.cryptomorin.xseries.XMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,6 +118,21 @@ public class Utils {
         if(section == null) section = config.createSection(path);
 
         return section;
+    }
+
+    public static void broadcastMessageExcludingPlayer(String msg, UUID excludedPlayerUUID) {
+        boolean centered = msg.contains("%center%");
+        if (centered) {
+            msg = msg.replaceAll("%center%", "");
+        }
+
+        Bukkit.getConsoleSender().sendMessage(centered ? MessageUtils.centeredMessage(Utils.translate(msg)) : Utils.translate(msg));
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!player.getUniqueId().equals(excludedPlayerUUID)) {
+                player.sendMessage(centered ? MessageUtils.centeredMessage(Utils.translate(msg)) : Utils.translate(msg));
+            }
+        }
     }
 
 }

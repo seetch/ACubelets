@@ -293,12 +293,7 @@ public class MessageUtils {
             msg = msg.replaceAll("%reward%", Matcher.quoteReplacement(Utils.getColorByText(reward.getRarity().getName()) + reward.getName()));
             msg = msg.replaceAll("%cubelet%", Matcher.quoteReplacement(reward.getParentCubelet().getName()));
 
-            if (msg.contains("%center%")) {
-                msg = msg.replaceAll("%center%", "");
-                main.getServer().broadcastMessage(MessageUtils.centeredMessage(Utils.translate(msg)));
-            } else {
-                main.getServer().broadcastMessage(Utils.translate(msg));
-            }
+            Utils.broadcastMessageExcludingPlayer(msg, cubeletMachine.getPlayerOpening().getUuid());
         }
 
     }
