@@ -542,7 +542,7 @@ public enum Particles {
      * @throws ParticleDataException    If the particle effect requires additional data
      * @throws IllegalArgumentException If the particle effect requires water and none is at the center location
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, double)
+     * @see ParticlePacket#sendTo(Location)
      */
     public void display(float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, double range) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
         if (!isSupported()) {
@@ -571,7 +571,7 @@ public enum Particles {
      * @throws ParticleDataException    If the particle effect requires additional data
      * @throws IllegalArgumentException If the particle effect requires water and none is at the center location
      * @see ParticlePacket
-     * @see ParticlePacket#sendTo(Location, List)
+     * @see ParticlePacket#sendTo(Location)
      */
     public void display(float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, List<Player> players) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
         if (!isSupported()) {
@@ -686,7 +686,7 @@ public enum Particles {
      * @throws ParticleVersionException If the particle effect is not supported by the server version
      * @throws ParticleColorException   If the particle effect is not colorable or the color type is incorrect
      * @see ParticlePacket#ParticlePacket(Particles, ParticleColor, boolean)
-     * @see ParticlePacket#sendTo(Location, double)
+     * @see ParticlePacket#sendTo(Location)
      */
     public void display(ParticleColor color, Location center, double range) throws ParticleVersionException, ParticleColorException {
         if (!isSupported()) {

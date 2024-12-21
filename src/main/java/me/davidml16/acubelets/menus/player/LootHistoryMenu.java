@@ -129,7 +129,7 @@ public class LootHistoryMenu extends Menu {
                         .hideAttributes()
                         .toItemStack();
 
-                item = NBTEditor.set(item, UUID.randomUUID().toString(), "randomUUID");
+                item = NBTEditor.set(item, UUID.randomUUID().toString(), NBTEditor.CUSTOM_DATA, "randomUUID");
 
                 gui.addItem(item);
 
